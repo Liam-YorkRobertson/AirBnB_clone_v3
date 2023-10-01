@@ -25,7 +25,9 @@ def err(error):
     """
     Handler for 404 errors
     """
-    return (jsonify({"error": "Not Found"}), 404)
+    response = jsonify({"error": "Not found"})
+    response.status_code = 404
+    return (response)
 
 
 if __name__ == "__main__":
