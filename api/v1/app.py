@@ -4,7 +4,7 @@ Main module for the API for the AirBnB clone.
 """
 from models import storage
 from api.v1.views import app_views
-from flask import Flask
+from flask import Flask, jsonify
 from os import getenv
 
 
@@ -18,6 +18,14 @@ def teardown(exception):
     Closes storage
     """
     storage.close()
+
+
+@app.errorhandler(404)
+def err(error):
+    """
+    Handler for 404 errors
+    """
+    return (jsonify({"error": "Not Found"}), 404)
 
 
 if __name__ == "__main__":
