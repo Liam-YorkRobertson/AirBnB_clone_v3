@@ -56,7 +56,9 @@ def create_new_state():
         return (jsonify({"error": "Not a JSON"}), 400)
     if "name" not in data:
         return (jsonify({"error": "Missing name"}), 400)
-    new_state = State(**data)
+    new_state = State()
+    for key, value in data.items():
+        setattr(new_state, key, value) 
     new_state.save()
     return (jsonify(new_state.to_dict()), 201)
 
