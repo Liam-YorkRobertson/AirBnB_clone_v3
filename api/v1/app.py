@@ -6,6 +6,7 @@ from models import storage
 from api.v1.views import app_views
 from flask import Flask, jsonify
 from os import getenv
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -28,6 +29,9 @@ def err(error):
     response = jsonify({"error": "Not found"})
     response.status_code = 404
     return (response)
+
+
+CORS(app, resources={r"/api/v1/*": {"origins": "0.0.0.0"}})
 
 
 if __name__ == "__main__":
